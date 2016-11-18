@@ -1,0 +1,18 @@
+version: '2'
+services:
+  # Mongo Database
+  phusion-baseimage:
+    build: ./build/phusion-baseimage
+    volumes:
+      - ${COMPOSE_DOCKER_DATA}/${COMPOSE_PROJECT_NAME}/phusion-baseimage/config:/config
+    environment:
+      HOSTNAME: phusion-baseimage
+    extra_hosts:
+      - "phusion-baseimage:127.0.0.1"
+    ports:
+      - "80:80"
+    networks:
+      - main
+
+networks:
+  main:
