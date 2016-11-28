@@ -1,6 +1,6 @@
 version: '2'
 services:
-  # Mongo Database
+  # Phusion BaseImage
   phusion-baseimage:
     build: ./build/phusion-baseimage
     volumes:
