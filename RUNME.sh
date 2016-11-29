@@ -18,12 +18,18 @@ fi
 #############
 ## General
 #############
-export COMPOSE_PROJECT_NAME="docker-graylog2-standalone"
-export COMPOSE_DOCKER_DATA="${DOCKER_DATA:-/opt/docker_data}"
-export COMPOSE_DOCKER_CONFIG="${DOCKER_CONFIG:-/opt/docker_config}"
-export COMPOSE_FLUENTD_SERVER="${FLUENTD_SERVER:-1.1.1.1}"
-export COMPOSE_DOCKER_SERVER_IP="$(/sbin/ifconfig eth0 | grep 'inet ' | grep -Eow '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | head -1)"
-export COMPOSE_DOCKER_SERVER_HOSTNAME="$(hostname -f)"
+export COMPOSE_PROJECT_NAME="${COMPOSE_PROJECT_NAME:-${PWD##*/}}" # Set ProjectName to curent folder
+export COMPOSE_DOCKER_DATA="${DOCKER_DATA:-/opt/docker_data}" # Storage Location for Containers to Put Data
+export COMPOSE_DOCKER_CONFIG="${DOCKER_CONFIG:-/opt/docker_config}" # Storage Location for Containers to Put Configuration Files
+export COMPOSE_FLUENTD_SERVER="${FLUENTD_SERVER:-1.1.1.1}" # FluentD Server for Docker to Send Logs to
+export COMPOSE_DOCKER_SERVER_IP="$(/sbin/ifconfig eth0 | grep 'inet ' | grep -Eow '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | head -1)" # IP of Docker Server
+export COMPOSE_DOCKER_SERVER_HOSTNAME="$(hostname -f)" # Hostname of Docker Server
+
+#############
+## <CONTAINER VARIALBES>
+#############
+
+#export COMPOSE_<CONTAINER>_<ITEM>="${COMPOSE_<CONTAINER>_<ITEM>:-<Default Value if Not Assigned in Overrides>}"
 
 #####
 
