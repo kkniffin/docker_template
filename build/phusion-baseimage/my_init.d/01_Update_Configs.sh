@@ -5,7 +5,7 @@
 ############################################################################################
 
 CONFIGFILETEMPLATE=<CONFIG TEMPLATE> # Configuration Template Location
-CONFIGFILE=<CONFIG FILE LOCATION> # Configuration File Location
+CONFIGFILE=<CONFIG FILE LOCATION> # Configuration File Location Ex: CONFIGFILE_
 ENV_VARIABLEPREFIX=<ENVIRONMENT VARIALBE PREFIX> # Ex: GRAYLOG_ anything starting with GRAYLOG_ will be processed
 SETTINGS_START_SEPERATOR='#<-- START SETTINGS -->' # Starting Seperator for identifying custom config
 SETTINGS_END_SEPERATOR='#<-- END SETTINGS -->' # Ending Seperator for identifying custom config
