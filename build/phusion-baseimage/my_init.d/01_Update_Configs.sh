@@ -4,15 +4,15 @@
 ##### SAMPLE CONFIG FOR UPDATING CONFIGS FROM ENVIRONMENT VARIABLES ########################
 ############################################################################################
 
-CONFIGFILETEMPLATE=/opt/config_templates/graylog/server.conf
-CONFIGFILE=/etc/graylog/server/server.conf
-VARIABLEPREFIX=GRAYLOG_
-SETTINGS_START_SEPERATOR='#<-- START SETTINGS -->'
-SETTINGS_END_SEPERATOR='#<-- END SETTINGS -->'
+CONFIGFILETEMPLATE=<CONFIG TEMPLATE> # Configuration Template Location
+CONFIGFILE=<CONFIG FILE LOCATION> # Configuration File Location
+ENV_VARIABLEPREFIX=<ENVIRONMENT VARIALBE PREFIX> # Ex: GRAYLOG_ anything starting with GRAYLOG_ will be processed
+SETTINGS_START_SEPERATOR='#<-- START SETTINGS -->' # Starting Seperator for identifying custom config
+SETTINGS_END_SEPERATOR='#<-- END SETTINGS -->' # Ending Seperator for identifying custom config
 
 # If Configuration files dont exist, then copy the default package config to appropriate location
 if [ ! -f ${CONFIGTEMPLATE} ]; then
-  cp ${CONFIGTEMPLATE} /etc/graylog/server/
+  cp ${CONFIGTEMPLATE} ${CONFIGFILE}
 fi
 
 # Modify Configuration Files with Environment Variables that were passed
@@ -24,11 +24,11 @@ sed -i "/${SETTINGS_START_SEPERATOR}.*/,$ d" $CONFIG
 # Start Custom Config Section
 echo -e "${SETTINGS_START_SEPERATOR}" >> $CONFIG
 
-for ENVVARIABLE in ${!VARIABLEPREFIX*}
+for ENVVARIABLE in ${!ENV_VARIABLEPREFIX*}
 do
 
 	# Remove Graylog_ Prefix from Environment Variables
-        CONFIGVARIABLE="$(echo ${ENVVARIABLE,,} | sed "s/${VARIABLEPREFIX}//i")"
+        CONFIGVARIABLE="$(echo ${ENVVARIABLE,,} | sed "s/${ENV_VARIABLEPREFIX}//i")"
         # Get Value for Variable
         CONFIGVALUE="$(printenv $ENVVARIABLE)"
 
