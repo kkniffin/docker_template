@@ -4,25 +4,19 @@
 ##### SAMPLE CONFIG FOR UPDATING CONFIGS FROM ENVIRONMENT VARIABLES ########################
 ############################################################################################
 
-CONFIGFILETEMPLATE=<CONFIG TEMPLATE> # Configuration Template Location
 CONFIGFILE=<CONFIG FILE LOCATION> # Configuration File Location 
 ENV_VARIABLEPREFIX=<ENVIRONMENT VARIALBE PREFIX> # Ex: CONFIGFILE_ anything starting with CONFIGFILE_ will be processed
 SETTINGS_START_SEPERATOR='#<-- START SETTINGS -->' # Starting Seperator for identifying custom config
 SETTINGS_END_SEPERATOR='#<-- END SETTINGS -->' # Ending Seperator for identifying custom config
 
-# If Configuration files dont exist, then copy the default package config to appropriate location
-if [ ! -f ${CONFIGTEMPLATE} ]; then
-  cp ${CONFIGTEMPLATE} ${CONFIGFILE}
-fi
-
 # Modify Configuration Files with Environment Variables that were passed
 #if [[ ! $(grep -Pzo '####\nCUSTOM SETTINGS\n####' $CONFIGFILE) ]]; then echo -e "\n\n#### CUSTOM SETTINGS ####\n" >> $CONFIGFILE; fi
 
 # Remove Existing Custom Config Starting at Seperator to end of file
-sed -i "/${SETTINGS_START_SEPERATOR}.*/,$ d" $CONFIG
+sed -i "/${SETTINGS_START_SEPERATOR}.*/,$ d" $CONFIGFILE
 
 # Start Custom Config Section
-echo -e "${SETTINGS_START_SEPERATOR}" >> $CONFIG
+echo -e "${SETTINGS_START_SEPERATOR}" >> $CONFIGFILE
 
 for ENVVARIABLE in ${!ENV_VARIABLEPREFIX*}
 do
