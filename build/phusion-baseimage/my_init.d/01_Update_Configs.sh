@@ -9,9 +9,6 @@ ENV_VARIABLEPREFIX=<ENVIRONMENT VARIALBE PREFIX> # Ex: CONFIGFILE_ anything star
 SETTINGS_START_SEPERATOR='#<-- START SETTINGS -->' # Starting Seperator for identifying custom config
 SETTINGS_END_SEPERATOR='#<-- END SETTINGS -->' # Ending Seperator for identifying custom config
 
-# Modify Configuration Files with Environment Variables that were passed
-#if [[ ! $(grep -Pzo '####\nCUSTOM SETTINGS\n####' $CONFIGFILE) ]]; then echo -e "\n\n#### CUSTOM SETTINGS ####\n" >> $CONFIGFILE; fi
-
 # Remove Existing Custom Config Starting at Seperator to end of file
 sed -i "/${SETTINGS_START_SEPERATOR}.*/,$ d" $CONFIGFILE
 
