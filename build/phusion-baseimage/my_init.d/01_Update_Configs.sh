@@ -7,6 +7,8 @@
 CONFIGFILETEMPLATE=/opt/config_templates/graylog/server.conf
 CONFIGFILE=/etc/graylog/server/server.conf
 VARIABLEPREFIX=GRAYLOG_
+SETTINGS_START_SEPERATOR='#<-- START SETTINGS -->'
+SETTINGS_END_SEPERATOR='#<-- END SETTINGS -->'
 
 # If Configuration files dont exist, then copy the default package config to appropriate location
 if [ ! -f ${CONFIGTEMPLATE} ]; then
@@ -16,11 +18,11 @@ fi
 # Modify Configuration Files with Environment Variables that were passed
 #if [[ ! $(grep -Pzo '####\nCUSTOM SETTINGS\n####' $CONFIGFILE) ]]; then echo -e "\n\n#### CUSTOM SETTINGS ####\n" >> $CONFIGFILE; fi
 
-# Remove Existing Custom Config
-sed -i '/#<-- START SETTINGS -->.*/,$ d' $CONFIG
+# Remove Existing Custom Config Starting at Seperator to end of file
+sed -i "/${SETTINGS_START_SEPERATOR}.*/,$ d" $CONFIG
 
 # Start Custom Config Section
-echo -e "#<-- START SETTINGS -->" >> $CONFIG
+echo -e "${SETTINGS_START_SEPERATOR}" >> $CONFIG
 
 for ENVVARIABLE in ${!VARIABLEPREFIX*}
 do
@@ -42,4 +44,4 @@ do
 done
 
 # End Custom Config Section
-echo -e "#<-- END SETTINGS -->" >> $CONFIGFILE
+echo -e "${SETTINGS_END_SEPERATOR}" >> $CONFIGFILE
