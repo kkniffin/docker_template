@@ -31,3 +31,10 @@
 #        sed -i "s|^${CONFIG_COMMENT_PREFIX}[ ]?${CONFIGVARIABLE}.*|${CONFIGVARIABLE} = ${CONFIGVALUE}|" $CONFIG_FILE
 
 #done
+
+#echo #################################################################### >&2
+#echo ####### Environment Variables for $ENV_VARIABLEPREFIX ############## >&2
+#echo ####################################################################
+#set | grep -i $ENV_VARIABLEPREFIX
+#echo #################################################################### >&2
+#echo #################################################################### >&2
